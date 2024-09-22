@@ -14,8 +14,12 @@ public class AgregarProductos extends javax.swing.JInternalFrame {
     /**
      * Creates new form AgregarProductos
      */
+    private CategoriaData cd;
+    
     public AgregarProductos() {
         initComponents();
+        cd = new CategoriaData();
+        llenarCombos();
     }
 
     /**
@@ -27,7 +31,6 @@ public class AgregarProductos extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jCCategoria = new javax.swing.JComboBox();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTProductos = new javax.swing.JTable();
@@ -39,9 +42,9 @@ public class AgregarProductos extends javax.swing.JInternalFrame {
         jTPrecio = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jCRubro = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
         jSStock = new javax.swing.JSpinner();
+        jCcategoriasProducto = new javax.swing.JComboBox<>();
         jBNuevo = new javax.swing.JButton();
         jBGuardar = new javax.swing.JButton();
         jBActualizar = new javax.swing.JButton();
@@ -49,17 +52,11 @@ public class AgregarProductos extends javax.swing.JInternalFrame {
         jBBuscar = new javax.swing.JButton();
         jBCerrar = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
+        jCcategorias = new javax.swing.JComboBox<>();
 
         setClosable(true);
         setTitle("De todo S.A: Productos");
         setPreferredSize(new java.awt.Dimension(800, 800));
-
-        jCCategoria.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "COMESTIBLE", "LIMPIEZA", "PERFUMERIA" }));
-        jCCategoria.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCCategoriaActionPerformed(evt);
-            }
-        });
 
         jLabel1.setText("Filtrar por categoria:");
 
@@ -104,13 +101,6 @@ public class AgregarProductos extends javax.swing.JInternalFrame {
 
         jLabel5.setText("Rubro:");
 
-        jCRubro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "COMESTIBLE", "LIMPIEZA", "PERFUMERIA" }));
-        jCRubro.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCRubroActionPerformed(evt);
-            }
-        });
-
         jLabel6.setText("Stock:");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -142,9 +132,11 @@ public class AgregarProductos extends javax.swing.JInternalFrame {
                                     .addComponent(jLabel4)
                                     .addGap(47, 47, 47)
                                     .addComponent(jTPrecio)))
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jSStock, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jCRubro, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jCcategoriasProducto, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                    .addComponent(jSStock, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(183, 183, 183))))
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
@@ -165,8 +157,8 @@ public class AgregarProductos extends javax.swing.JInternalFrame {
                 .addGap(56, 56, 56)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(jCRubro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                    .addComponent(jCcategoriasProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(jSStock, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -213,6 +205,12 @@ public class AgregarProductos extends javax.swing.JInternalFrame {
         jLabel7.setText("Gestion de productos");
         jLabel7.setPreferredSize(new java.awt.Dimension(900, 900));
 
+        jCcategorias.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCcategoriasActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -226,7 +224,7 @@ public class AgregarProductos extends javax.swing.JInternalFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel1)
                                 .addGap(30, 30, 30)
-                                .addComponent(jCCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(jCcategorias, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(179, 179, 179)
                         .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 361, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -250,17 +248,17 @@ public class AgregarProductos extends javax.swing.JInternalFrame {
                                 .addComponent(jBActualizar)
                                 .addGap(44, 44, 44)
                                 .addComponent(jBEliminar)))))
-                .addContainerGap(40, Short.MAX_VALUE))
+                .addContainerGap(96, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(28, Short.MAX_VALUE)
                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(33, 33, 33)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jCCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jCcategorias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(29, 29, 29)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -283,10 +281,6 @@ public class AgregarProductos extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jCCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCCategoriaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jCCategoriaActionPerformed
-
     private void jTPrecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTPrecioActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTPrecioActionPerformed
@@ -298,10 +292,6 @@ public class AgregarProductos extends javax.swing.JInternalFrame {
     private void jTCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTCodigoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTCodigoActionPerformed
-
-    private void jCRubroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCRubroActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jCRubroActionPerformed
 
     private void jBCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCerrarActionPerformed
         // TODO add your handling code here:
@@ -319,6 +309,18 @@ public class AgregarProductos extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jBNuevoActionPerformed
 
+    private void jCcategoriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCcategoriasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCcategoriasActionPerformed
+ private void llenarCombos(){
+       
+        for(Categoria c:cd.obtenerCategorias()){
+        
+            jCcategorias.addItem(c);
+            jCcategoriasProducto.addItem(c);
+            
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBActualizar;
@@ -327,8 +329,8 @@ public class AgregarProductos extends javax.swing.JInternalFrame {
     private javax.swing.JButton jBEliminar;
     private javax.swing.JButton jBGuardar;
     private javax.swing.JButton jBNuevo;
-    private javax.swing.JComboBox jCCategoria;
-    private javax.swing.JComboBox<String> jCRubro;
+    private javax.swing.JComboBox<Categoria> jCcategorias;
+    private javax.swing.JComboBox<Categoria> jCcategoriasProducto;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

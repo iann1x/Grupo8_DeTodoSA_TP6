@@ -6,7 +6,7 @@ public class Menu extends javax.swing.JFrame {
 
     public Menu() {
         initComponents();
-        cargarProductos();
+        
         
     }
 
@@ -68,6 +68,11 @@ public class Menu extends javax.swing.JFrame {
         jMenu2.add(jMenuItem7);
 
         jMenuItem8.setText("Por precio");
+        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem8ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem8);
 
         jMenuBar1.add(jMenu2);
@@ -113,6 +118,10 @@ public class Menu extends javax.swing.JFrame {
         escritorio.moveToFront(bpn2);
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
+    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem8ActionPerformed
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -155,16 +164,5 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem8;
     // End of variables declaration//GEN-END:variables
 
-private void cargarProductos (){
-    
-        listaProductos.add(new Producto (10,"Azucar ",  180, 5, Categoria.COMESTIBLE ));
-        listaProductos.add(new Producto (12, "Aceite de Oliva" , 950, 10,  Categoria.COMESTIBLE ));
-        listaProductos.add(new Producto (14, "Yerba" , 600, 7, Categoria.COMESTIBLE));
-        listaProductos.add(new Producto (16, "Jabon Skyp", 700, 3, Categoria.LIMPIEZA));
-        listaProductos.add(new Producto (18, "Detergente Magistral", 400, 5, Categoria.LIMPIEZA));
-        listaProductos.add(new Producto (20, " Desengrasante ", 350, 7, Categoria.LIMPIEZA));
-        listaProductos.add(new Producto (22, "Colonia Paco", 550, 2, Categoria.PERFUMERIA));
-        listaProductos.add(new Producto (24, "Set de Maquillaje", 1800, 3, Categoria.PERFUMERIA));
-        listaProductos.add(new Producto (26, "Delineador", 680, 8, Categoria.PERFUMERIA));
-    }
+
 }
