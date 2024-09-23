@@ -4,6 +4,9 @@
  */
 package detodosa;
 
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Facundo ç
@@ -13,8 +16,13 @@ public class BusquedaPorPrecio extends javax.swing.JInternalFrame {
     /**
      * Creates new form BusquedaPorPrecio
      */
+    private DefaultTableModel modelo;
+    
+    
     public BusquedaPorPrecio() {
         initComponents();
+        modelo=new DefaultTableModel();
+        ArmarCabecera();
     }
 
     /**
@@ -32,7 +40,7 @@ public class BusquedaPorPrecio extends javax.swing.JInternalFrame {
         jLabel3 = new javax.swing.JLabel();
         jTpreciomaximo = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTableprecio = new javax.swing.JTable();
+        jTProductos = new javax.swing.JTable();
 
         setClosable(true);
 
@@ -45,7 +53,7 @@ public class BusquedaPorPrecio extends javax.swing.JInternalFrame {
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel3.setText("y");
 
-        jTableprecio.setModel(new javax.swing.table.DefaultTableModel(
+        jTProductos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -56,7 +64,7 @@ public class BusquedaPorPrecio extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTableprecio);
+        jScrollPane1.setViewportView(jTProductos);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -98,14 +106,28 @@ public class BusquedaPorPrecio extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+ private void ArmarCabecera(){
+  ArrayList<Object> columnas=new ArrayList<Object>();
+        columnas.add("ID");
+        columnas.add("Codigo");
+        columnas.add("Descripcion");
+        columnas.add("Precio");
+        columnas.add("Categoria");
+        columnas.add("Stock");
+        
+        for(Object it:columnas){
+        
+            modelo.addColumn(it);
+        }
+        jTProductos.setModel(modelo);
+  }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTableprecio;
+    private javax.swing.JTable jTProductos;
     private javax.swing.JTextField jTpreciomaximo;
     private javax.swing.JTextField jTpreciominimo;
     // End of variables declaration//GEN-END:variables

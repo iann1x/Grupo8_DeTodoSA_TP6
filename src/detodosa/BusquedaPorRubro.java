@@ -4,6 +4,9 @@
  */
 package detodosa;
 
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Facundo ç
@@ -13,8 +16,17 @@ public class BusquedaPorRubro extends javax.swing.JInternalFrame {
     /**
      * Creates new form BusquedaPorRubro
      */
+    private CategoriaData cd;
+    private ProductoData pd;
+    private DefaultTableModel modelo;
+    
     public BusquedaPorRubro() {
         initComponents();
+        modelo=new DefaultTableModel();
+        cd=new CategoriaData();
+        pd = new ProductoData();
+        llenarCombos();
+        ArmarCabecera();
     }
 
     /**
@@ -32,9 +44,9 @@ public class BusquedaPorRubro extends javax.swing.JInternalFrame {
         jTable2 = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jCrubros = new javax.swing.JComboBox<>();
+        jCcategorias = new javax.swing.JComboBox<>();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable3 = new javax.swing.JTable();
+        jTProductos = new javax.swing.JTable();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -70,9 +82,13 @@ public class BusquedaPorRubro extends javax.swing.JInternalFrame {
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel2.setText("Rubro:");
 
-        jCrubros.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Rubros", "Comestibles", "Limpieza", "Perfumeria", " " }));
+        jCcategorias.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCcategoriasActionPerformed(evt);
+            }
+        });
 
-        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+        jTProductos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -83,7 +99,7 @@ public class BusquedaPorRubro extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane3.setViewportView(jTable3);
+        jScrollPane3.setViewportView(jTProductos);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -98,7 +114,7 @@ public class BusquedaPorRubro extends javax.swing.JInternalFrame {
                         .addGap(74, 74, 74)
                         .addComponent(jLabel2)
                         .addGap(18, 18, 18)
-                        .addComponent(jCrubros, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jCcategorias, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(133, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
@@ -112,7 +128,7 @@ public class BusquedaPorRubro extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jCrubros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jCcategorias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(31, Short.MAX_VALUE))
@@ -121,16 +137,67 @@ public class BusquedaPorRubro extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jCcategoriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCcategoriasActionPerformed
+        LlenarTabla();
+    }//GEN-LAST:event_jCcategoriasActionPerformed
+
+   private void llenarCombos(){
+       
+        for(Categoria c:cd.obtenerCategorias()){
+        
+            jCcategorias.addItem(c);
+           
+            
+        }
+    } 
+   private void ArmarCabecera(){
+  ArrayList<Object> columnas=new ArrayList<Object>();
+        columnas.add("ID");
+        columnas.add("Codigo");
+        columnas.add("Descripcion");
+        columnas.add("Precio");
+        columnas.add("Categoria");
+        columnas.add("Stock");
+        
+        for(Object it:columnas){
+        
+            modelo.addColumn(it);
+        }
+        jTProductos.setModel(modelo);
+  }
+    private void LlenarTabla(){
+         BorrarFilas();    
+         Categoria elegida=(Categoria)jCcategorias.getSelectedItem();
+        
+        if(elegida!=null){
+        
+            for(Producto p:pd.obtenerProductos()){
+            
+                if(p.getCategoria().equals(elegida)){
+                
+                    modelo.addRow(new Object[]{p.getIdProducto(),p.getCodigo(),p.getDescripcion(),p.getPrecio(),p.getCategoria(),p.getStock()});
+                }
+            }
+        }
+  }
+   private void BorrarFilas(){
+         int a = modelo.getRowCount()-1;
+
+                for(int i=a;i>=0;i--){
+   
+                    modelo.removeRow(i );
+            }
+  }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> jCrubros;
+    private javax.swing.JComboBox<Categoria> jCcategorias;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JTable jTProductos;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
-    private javax.swing.JTable jTable3;
     // End of variables declaration//GEN-END:variables
 }
