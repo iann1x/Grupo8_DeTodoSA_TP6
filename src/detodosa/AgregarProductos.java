@@ -21,6 +21,7 @@ public class AgregarProductos extends javax.swing.JInternalFrame {
     private CategoriaData cd;
     private ProductoData pd;
     private DefaultTableModel modelo;
+    private Producto productoElegido;
     
     public AgregarProductos() {
         initComponents();
@@ -82,6 +83,11 @@ public class AgregarProductos extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTProductos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTProductosMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTProductos);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -211,10 +217,20 @@ public class AgregarProductos extends javax.swing.JInternalFrame {
         jBActualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8-aprobar-y-actualizar-48.png"))); // NOI18N
         jBActualizar.setText("Actualizar");
         jBActualizar.setEnabled(false);
+        jBActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBActualizarActionPerformed(evt);
+            }
+        });
 
         jBEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/eliminar.png"))); // NOI18N
         jBEliminar.setText("Eliminar");
         jBEliminar.setEnabled(false);
+        jBEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBEliminarActionPerformed(evt);
+            }
+        });
 
         jBBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8-magnifying-glass-tilted-right-48.png"))); // NOI18N
         jBBuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -323,7 +339,7 @@ public class AgregarProductos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jTCodigoActionPerformed
 
     private void jBCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCerrarActionPerformed
-        // TODO add your handling code here:
+        dispose();
     }//GEN-LAST:event_jBCerrarActionPerformed
 
     private void jBGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGuardarActionPerformed
@@ -384,6 +400,65 @@ public class AgregarProductos extends javax.swing.JInternalFrame {
             jTPrecio.requestFocus();
         }   
     }//GEN-LAST:event_jTPrecioFocusLost
+
+    private void jTProductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTProductosMouseClicked
+        jBActualizar.setEnabled(true);
+        jBEliminar.setEnabled(true);
+        int filaElegida=jTProductos.getSelectedRow();
+        
+        if(filaElegida!=-1){
+                int idProducto=(Integer)jTProductos.getValueAt(filaElegida, 0);
+                int codigo=(Integer)jTProductos.getValueAt(filaElegida, 1);
+                String descripcion=(String)jTProductos.getValueAt(filaElegida, 2);
+                double precio=(Double)jTProductos.getValueAt(filaElegida,3);
+                Categoria catTabla=(Categoria)jTProductos.getValueAt(filaElegida, 4);
+                int stock=(Integer)jTProductos.getValueAt(filaElegida, 5);
+                
+                jTCodigo.setText(codigo+"");
+                jTDescripcion.setText(descripcion);
+                jTPrecio.setText(precio+"");
+                jCcategoriasProducto.setSelectedItem(catTabla);
+                jSStock.setValue(stock);
+                
+                activarCampos();
+                productoElegido=new Producto();
+                productoElegido.setIdProducto(idProducto);
+                productoElegido.setCodigo(codigo);
+                productoElegido.setDescripcion(descripcion);
+                productoElegido.setPrecio(precio);
+                productoElegido.setCategoria(catTabla);
+                productoElegido.setStock(stock);
+        }
+    }//GEN-LAST:event_jTProductosMouseClicked
+
+    private void jBActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBActualizarActionPerformed
+        int codigo=Integer.parseInt(jTCodigo.getText());
+                String descripcion=jTDescripcion.getText();
+                double precio=Double.parseDouble(jTPrecio.getText());
+                Categoria catNueva=(Categoria)jCcategoriasProducto.getSelectedItem();
+                int stock=(Integer)jSStock.getValue();
+                
+                
+                productoElegido.setCodigo(codigo);
+                productoElegido.setDescripcion(descripcion);
+                productoElegido.setPrecio(precio);
+                productoElegido.setStock(stock);
+                productoElegido.setCategoria(catNueva);
+                
+                 pd.modificarProducto(productoElegido);
+                 productoElegido=null;
+                limpiarCampos();
+                DesactivarCampos();
+                LlenarTabla();
+                jBActualizar.setEnabled(false);
+    }//GEN-LAST:event_jBActualizarActionPerformed
+
+    private void jBEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEliminarActionPerformed
+        pd.borraProducto(productoElegido);
+        DesactivarCampos();
+        LlenarTabla();
+        jBEliminar.setEnabled(false);
+    }//GEN-LAST:event_jBEliminarActionPerformed
     
     private void llenarCombos(){
        
