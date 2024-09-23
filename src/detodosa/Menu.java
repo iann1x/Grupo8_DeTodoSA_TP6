@@ -1,11 +1,17 @@
 package detodosa;
 import java.util.TreeSet;
+import javax.swing.JDesktopPane;
 
 public class Menu extends javax.swing.JFrame {
     public static TreeSet<Producto> listaProductos = new TreeSet<> ();
 
+   private EscritorioPersonalizado es;
     public Menu() {
         initComponents();
+        es= new EscritorioPersonalizado();
+        es=new EscritorioPersonalizado();
+        this.setContentPane(es);
+        
         
         
     }
@@ -14,7 +20,6 @@ public class Menu extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        escritorio = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem5 = new javax.swing.JMenuItem();
@@ -24,17 +29,6 @@ public class Menu extends javax.swing.JFrame {
         jMenuItem8 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        javax.swing.GroupLayout escritorioLayout = new javax.swing.GroupLayout(escritorio);
-        escritorio.setLayout(escritorioLayout);
-        escritorioLayout.setHorizontalGroup(
-            escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 485, Short.MAX_VALUE)
-        );
-        escritorioLayout.setVerticalGroup(
-            escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 336, Short.MAX_VALUE)
-        );
 
         jMenu1.setText("Administracion");
 
@@ -82,54 +76,54 @@ public class Menu extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(escritorio)
+            .addGap(0, 485, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(escritorio)
+            .addGap(0, 336, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
-  escritorio.removeAll();
-  escritorio.repaint();
+  es.removeAll();
+  es.repaint();
   BusquedaPorRubro bpr= new BusquedaPorRubro ();
   bpr.setVisible(true);
-  escritorio.add(bpr);
-  escritorio.moveToFront(bpr);
+  es.add(bpr);
+  es.moveToFront(bpr);
      
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
 
-         escritorio.removeAll();
-        escritorio.repaint();
+         es.removeAll();
+        es.repaint();
         BusquedaPorNombre bpn = new BusquedaPorNombre ();
         bpn.setVisible(true);
-        escritorio.add(bpn);
-        escritorio.moveToFront(bpn);
+        es.add(bpn);
+        es.moveToFront(bpn);
     }//GEN-LAST:event_jMenuItem7ActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
         // TODO add your handling code here:
-        escritorio.removeAll();
-        escritorio.repaint();
+        es.removeAll();
+        es.repaint();
         AgregarProductos bpn2 = new AgregarProductos();
         bpn2.setVisible(true);
-        escritorio.add(bpn2);
-        escritorio.moveToFront(bpn2);
+        es.add(bpn2);
+        es.moveToFront(bpn2);
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
         // TODO add your handling code here:
-          escritorio.removeAll();
-  escritorio.repaint();
+          es.removeAll();
+  es.repaint();
   BusquedaPorPrecio bpp= new BusquedaPorPrecio();
   bpp.setVisible(true);
-  escritorio.add(bpp);
-  escritorio.moveToFront(bpp);
+  es.add(bpp);
+  es.moveToFront(bpp);
     }//GEN-LAST:event_jMenuItem8ActionPerformed
 
     public static void main(String args[]) {
@@ -164,7 +158,6 @@ public class Menu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JDesktopPane escritorio;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
