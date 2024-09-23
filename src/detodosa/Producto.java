@@ -14,6 +14,10 @@ public class Producto implements Comparable<Producto>{
         this.rubro = rubro;
     }
 
+    Producto() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
     public int getCodigo() {
         return codigo;
     }
@@ -67,6 +71,22 @@ public class Producto implements Comparable<Producto>{
                 return -1;
         }
         }
+
+    void setIdProducto(int i) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    boolean getIdProducto() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    void setCategoria(Categoria rubro) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    Object getCategoria() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
         
     
 }

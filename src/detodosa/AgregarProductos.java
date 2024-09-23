@@ -1,5 +1,9 @@
 package detodosa;
 
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
@@ -15,11 +19,17 @@ public class AgregarProductos extends javax.swing.JInternalFrame {
      * Creates new form AgregarProductos
      */
     private CategoriaData cd;
+    private ProductoData pd;
+    private DefaultTableModel modelo;
     
     public AgregarProductos() {
         initComponents();
+        modelo= new DefaultTableModel();
         cd = new CategoriaData();
+        pd = new ProductoData();
         llenarCombos();
+        DesactivarCampos();
+        ArmarCabecera();
     }
 
     /**
@@ -56,6 +66,7 @@ public class AgregarProductos extends javax.swing.JInternalFrame {
 
         setClosable(true);
         setTitle("De todo S.A: Productos");
+        setEnabled(false);
         setPreferredSize(new java.awt.Dimension(800, 800));
 
         jLabel1.setText("Filtrar por categoria:");
@@ -75,6 +86,11 @@ public class AgregarProductos extends javax.swing.JInternalFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
+        jTCodigo.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTCodigoFocusLost(evt);
+            }
+        });
         jTCodigo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTCodigoActionPerformed(evt);
@@ -83,6 +99,11 @@ public class AgregarProductos extends javax.swing.JInternalFrame {
 
         jLabel2.setText("Codigo:");
 
+        jTDescripcion.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTDescripcionFocusLost(evt);
+            }
+        });
         jTDescripcion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTDescripcionActionPerformed(evt);
@@ -91,6 +112,11 @@ public class AgregarProductos extends javax.swing.JInternalFrame {
 
         jLabel3.setText("Descripcion:");
 
+        jTPrecio.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTPrecioFocusLost(evt);
+            }
+        });
         jTPrecio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTPrecioActionPerformed(evt);
@@ -175,6 +201,7 @@ public class AgregarProductos extends javax.swing.JInternalFrame {
 
         jBGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/guardar.png"))); // NOI18N
         jBGuardar.setText("Guardar");
+        jBGuardar.setEnabled(false);
         jBGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBGuardarActionPerformed(evt);
@@ -183,9 +210,11 @@ public class AgregarProductos extends javax.swing.JInternalFrame {
 
         jBActualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8-aprobar-y-actualizar-48.png"))); // NOI18N
         jBActualizar.setText("Actualizar");
+        jBActualizar.setEnabled(false);
 
         jBEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/eliminar.png"))); // NOI18N
         jBEliminar.setText("Eliminar");
+        jBEliminar.setEnabled(false);
 
         jBBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8-magnifying-glass-tilted-right-48.png"))); // NOI18N
         jBBuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -268,7 +297,7 @@ public class AgregarProductos extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(35, 35, 35)
                         .addComponent(jBBuscar)
-                        .addGap(146, 146, 146)
+                        .addGap(158, 158, 158)
                         .addComponent(jBCerrar)))
                 .addGap(40, 40, 40)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -298,7 +327,19 @@ public class AgregarProductos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jBCerrarActionPerformed
 
     private void jBGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGuardarActionPerformed
-        // TODO add your handling code here:
+       Producto pn=new Producto();
+          
+        pn.setCodigo(Integer.parseInt(jTCodigo.getText()));
+        pn.setDescripcion(jTDescripcion.getText());
+        pn.setPrecio(Double.parseDouble(jTPrecio.getText()));
+        pn.setCategoria((Categoria)jCcategoriasProducto.getSelectedItem());
+        pn.setStock((Integer)jSStock.getValue());
+        
+        pd.guardarProducto(pn);
+        limpiarCampos();
+        
+         DesactivarCampos();
+       jBGuardar.setEnabled(false);
     }//GEN-LAST:event_jBGuardarActionPerformed
 
     private void jBBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBuscarActionPerformed
@@ -306,13 +347,42 @@ public class AgregarProductos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jBBuscarActionPerformed
 
     private void jBNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBNuevoActionPerformed
-        // TODO add your handling code here:
+       activarCampos();
+       jBGuardar.setEnabled(true);
     }//GEN-LAST:event_jBNuevoActionPerformed
 
     private void jCcategoriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCcategoriasActionPerformed
-        // TODO add your handling code here:
+        LlenarTabla();
     }//GEN-LAST:event_jCcategoriasActionPerformed
- private void llenarCombos(){
+
+    private void jTCodigoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTCodigoFocusLost
+        String val="[0-9]*";
+        if(!jTCodigo.getText().matches(val)){
+        
+            JOptionPane.showMessageDialog(this, "Debe ingresar unicamente numeros");
+            jTCodigo.requestFocus();
+    }//GEN-LAST:event_jTCodigoFocusLost
+
+    }
+    private void jTDescripcionFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTDescripcionFocusLost
+        if(jTDescripcion.getText().length()==0){
+          JOptionPane.showMessageDialog(this,"La descripcion no puede estar vacia");
+          jTDescripcion.requestFocus();
+        }
+    }//GEN-LAST:event_jTDescripcionFocusLost
+
+    private void jTPrecioFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTPrecioFocusLost
+     try{
+        String precio=jTPrecio.getText();
+        double prec=Double.parseDouble(precio);
+        }catch(NumberFormatException NFE){
+        
+            JOptionPane.showMessageDialog(this, "ingresa un precio válido");
+            jTPrecio.requestFocus();
+        }   
+    }//GEN-LAST:event_jTPrecioFocusLost
+    
+    private void llenarCombos(){
        
         for(Categoria c:cd.obtenerCategorias()){
         
@@ -321,6 +391,67 @@ public class AgregarProductos extends javax.swing.JInternalFrame {
             
         }
     }
+ public void activarCampos(){
+ jTCodigo.setEnabled(true);
+ jTDescripcion.setEnabled(true);
+ jTPrecio.setEnabled(true);
+ jSStock.setEnabled(true);
+ jCcategoriasProducto.setEnabled(true);
+ }
+  public void DesactivarCampos(){
+ jTCodigo.setEnabled(false);
+ jTDescripcion.setEnabled(false);
+ jTPrecio.setEnabled(false);
+ jSStock.setEnabled(false);
+ jCcategoriasProducto.setEnabled(false);
+ }
+  private void limpiarCampos(){
+    
+        jTCodigo.setText("");
+        jTDescripcion.setText("");
+        jTPrecio.setText("");
+        jCcategoriasProducto.setSelectedIndex(0);
+        jSStock.setValue(0);
+        
+    }
+  private void ArmarCabecera(){
+  ArrayList<Object> columnas=new ArrayList<Object>();
+        columnas.add("ID");
+        columnas.add("Codigo");
+        columnas.add("Descripcion");
+        columnas.add("Precio");
+        columnas.add("Categoria");
+        columnas.add("Stock");
+        
+        for(Object it:columnas){
+        
+            modelo.addColumn(it);
+        }
+        jTProductos.setModel(modelo);
+  }
+  private void LlenarTabla(){
+         BorrarFilas();    
+         Categoria elegida=(Categoria)jCcategorias.getSelectedItem();
+        
+        if(elegida!=null){
+        
+            for(Producto p:pd.obtenerProductos()){
+            
+                if(p.getCategoria().equals(elegida)){
+                
+                    modelo.addRow(new Object[]{p.getIdProducto(),p.getCodigo(),p.getDescripcion(),p.getPrecio(),p.getCategoria(),p.getStock()});
+                }
+            }
+        }
+  }
+  private void BorrarFilas(){
+         int a = modelo.getRowCount()-1;
+
+                for(int i=a;i>=0;i--){
+   
+                    modelo.removeRow(i );
+            }
+  }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBActualizar;
