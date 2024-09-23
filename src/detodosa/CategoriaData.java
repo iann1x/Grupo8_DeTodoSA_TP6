@@ -12,7 +12,7 @@ import java.util.ArrayList;
  *
  * @author Administrator
  */
-class CategoriaData {
+public class CategoriaData {
     public ArrayList<Categoria> obtenerCategorias(){
      
         ArrayList<Categoria> lista=new ArrayList<>();
