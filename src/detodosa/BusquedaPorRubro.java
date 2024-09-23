@@ -4,7 +4,9 @@
  */
 package detodosa;
 
+
 import java.util.ArrayList;
+import java.util.TreeSet;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -19,6 +21,7 @@ public class BusquedaPorRubro extends javax.swing.JInternalFrame {
     private CategoriaData cd;
     private ProductoData pd;
     private DefaultTableModel modelo;
+    private Producto productoElegido;
     
     public BusquedaPorRubro() {
         initComponents();
@@ -99,6 +102,11 @@ public class BusquedaPorRubro extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTProductos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTProductosMouseClicked(evt);
+            }
+        });
         jScrollPane3.setViewportView(jTProductos);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -140,6 +148,31 @@ public class BusquedaPorRubro extends javax.swing.JInternalFrame {
     private void jCcategoriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCcategoriasActionPerformed
         LlenarTabla();
     }//GEN-LAST:event_jCcategoriasActionPerformed
+
+    private void jTProductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTProductosMouseClicked
+       
+        int filaElegida=jTProductos.getSelectedRow();
+        
+        if(filaElegida!=-1){
+                int idProducto=(Integer)jTProductos.getValueAt(filaElegida, 0);
+                int codigo=(Integer)jTProductos.getValueAt(filaElegida, 1);
+                String descripcion=(String)jTProductos.getValueAt(filaElegida, 2);
+                double precio=(Double)jTProductos.getValueAt(filaElegida,3);
+                Categoria catTabla=(Categoria)jTProductos.getValueAt(filaElegida, 4);
+                int stock=(Integer)jTProductos.getValueAt(filaElegida, 5);
+                
+              
+                
+              
+                productoElegido=new Producto();
+                productoElegido.setIdProducto(idProducto);
+                productoElegido.setCodigo(codigo);
+                productoElegido.setDescripcion(descripcion);
+                productoElegido.setPrecio(precio);
+                productoElegido.setCategoria(catTabla);
+                productoElegido.setStock(stock);
+        }
+    }//GEN-LAST:event_jTProductosMouseClicked
 
    private void llenarCombos(){
        
