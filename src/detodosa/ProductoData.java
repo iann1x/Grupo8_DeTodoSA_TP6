@@ -38,7 +38,7 @@ public class ProductoData {
              if(it.getIdProducto()==productoNuevo.getIdProducto()){
                       it.setCodigo(productoNuevo.getCodigo());
                       it.setDescripcion(productoNuevo.getDescripcion());
-                      it.setCategoria(productoNuevo.getRubro());
+                      it.setCategoria(productoNuevo.getCategoria());
                       it.setStock(productoNuevo.getStock());
                       it.setPrecio(productoNuevo.getPrecio());
                       break;

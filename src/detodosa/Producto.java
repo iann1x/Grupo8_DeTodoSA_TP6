@@ -1,21 +1,40 @@
 package detodosa;
-public class Producto implements Comparable<Producto>{
+
+
+public class Producto {
+    private int idProducto;
     private int codigo;
     private String descripcion;
     private double precio;
+    private Categoria categoria;
     private int stock;
-    private Categoria rubro;
 
-    public Producto(int codigo, String descripcion, double precio, int stock, Categoria rubro) {
+    public Producto() {
+    }
+
+    public Producto(int codigo, String descripcion, double precio, Categoria categoria, int stock) {
         this.codigo = codigo;
         this.descripcion = descripcion;
         this.precio = precio;
+        this.categoria = categoria;
         this.stock = stock;
-        this.rubro = rubro;
     }
 
-    Producto() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public Producto(int idProducto, int codigo, String descripcion, double precio, Categoria categoria, int stock) {
+        this.idProducto = idProducto;
+        this.codigo = codigo;
+        this.descripcion = descripcion;
+        this.precio = precio;
+        this.categoria = categoria;
+        this.stock = stock;
+    }
+
+    public int getIdProducto() {
+        return idProducto;
+    }
+
+    public void setIdProducto(int idProducto) {
+        this.idProducto = idProducto;
     }
 
     public int getCodigo() {
@@ -42,6 +61,14 @@ public class Producto implements Comparable<Producto>{
         this.precio = precio;
     }
 
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
+    }
+
     public int getStock() {
         return stock;
     }
@@ -50,43 +77,36 @@ public class Producto implements Comparable<Producto>{
         this.stock = stock;
     }
 
-    public Categoria getRubro() {
-        return rubro;
+    @Override
+    public String toString() {
+        return idProducto+" "+" Producto{" + "codigo=" + codigo + ", descripcion=" + descripcion + ", stock=" + stock + '}';
     }
 
-    public void setRubro(Categoria rubro) {
-        this.rubro = rubro;
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 53 * hash + this.idProducto;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Producto other = (Producto) obj;
+        if (this.idProducto != other.idProducto) {
+            return false;
+        }
+        return true;
     }
     
-    @Override
-    public int compareTo (Producto t) {
-        if (codigo == t.codigo){
-            
-                return 0;
-        }else if (codigo > t.codigo){
-            
-                return 1;
-        }else{
-            
-                return -1;
-        }
-        }
-
-    void setIdProducto(int i) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    boolean getIdProducto() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    void setCategoria(Categoria rubro) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    Object getCategoria() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-        
+    
     
 }

@@ -24,8 +24,8 @@ public class AgregarProductos extends javax.swing.JInternalFrame {
     
     public AgregarProductos() {
         initComponents();
-        modelo= new DefaultTableModel();
         cd = new CategoriaData();
+        modelo= new DefaultTableModel();
         pd = new ProductoData();
         llenarCombos();
         DesactivarCampos();
@@ -347,8 +347,11 @@ public class AgregarProductos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jBBuscarActionPerformed
 
     private void jBNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBNuevoActionPerformed
-       activarCampos();
        jBGuardar.setEnabled(true);
+        limpiarCampos();
+        activarCampos();
+       jBActualizar.setEnabled(false);
+        jBEliminar.setEnabled(false);
     }//GEN-LAST:event_jBNuevoActionPerformed
 
     private void jCcategoriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCcategoriasActionPerformed
@@ -398,7 +401,7 @@ public class AgregarProductos extends javax.swing.JInternalFrame {
  jSStock.setEnabled(true);
  jCcategoriasProducto.setEnabled(true);
  }
-  public void DesactivarCampos(){
+  private void DesactivarCampos(){
  jTCodigo.setEnabled(false);
  jTDescripcion.setEnabled(false);
  jTPrecio.setEnabled(false);
