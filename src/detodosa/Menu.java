@@ -94,7 +94,12 @@ public class Menu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
-
+  escritorio.removeAll();
+  escritorio.repaint();
+  BusquedaPorRubro bpr= new BusquedaPorRubro ();
+  bpr.setVisible(true);
+  escritorio.add(bpr);
+  escritorio.moveToFront(bpr);
      
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
@@ -120,6 +125,12 @@ public class Menu extends javax.swing.JFrame {
 
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
         // TODO add your handling code here:
+          escritorio.removeAll();
+  escritorio.repaint();
+  BusquedaPorPrecio bpp= new BusquedaPorPrecio();
+  bpp.setVisible(true);
+  escritorio.add(bpp);
+  escritorio.moveToFront(bpp);
     }//GEN-LAST:event_jMenuItem8ActionPerformed
 
     public static void main(String args[]) {
